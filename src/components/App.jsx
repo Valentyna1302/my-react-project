@@ -200,33 +200,89 @@ import { useState, useEffect } from "react";
 
 //* Виправити проблему з модальним вікном тепер дуже просто, необхідно при розмонтуванні компонента очищати інтервал. Для цього зберігаємо ідентифікатор інтервалу в змінну і в функції очищення використовуємо її для виклику clearInterval.
 
-const Modal = () => {
-  useEffect(() => {
-    // Зберігаємо ідентифікатор інтервалу в змінну
-    const intervalId = setInterval(() => {
-      console.log(`Interval - ${Date.now()}`);
-    }, 2000);
+// const Modal = () => {
+//   useEffect(() => {
+//     // Зберігаємо ідентифікатор інтервалу в змінну
+//     const intervalId = setInterval(() => {
+//       console.log(`Interval - ${Date.now()}`);
+//     }, 2000);
 
-    return () => {
-      // Очищаємо інтервал за його ідентифікатором
-      clearInterval(intervalId);
-    };
-  }, []);
+//     return () => {
+//       // Очищаємо інтервал за його ідентифікатором
+//       clearInterval(intervalId);
+//     };
+//   }, []);
 
-  return <div>Modal</div>;
-};
+//   return <div>Modal</div>;
+// };
 
-const App = () => {
-  const [isOpen, setIsOpen] = useState(false);
+// const App = () => {
+//   const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <div>
-      <button onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? "Close" : "Open"}
-      </button>
-      {isOpen && <Modal />}
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <button onClick={() => setIsOpen(!isOpen)}>
+//         {isOpen ? "Close" : "Open"}
+//       </button>
+//       {isOpen && <Modal />}
+//     </div>
+//   );
+// };
+
+// export default App;
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+//   // ❌ Ефект записаний з помилкою!
+//   useEffect(() => {
+//     console.log("Clicks updated: ", clicks);
+//   }, []);
+
+//   return (
+//     <button onClick={() => setClicks(clicks + 1)}>
+//       You clicked {clicks} times
+//     </button>
+//   );
+// };
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+//   // ✅ Залежності вказані правильно
+//   useEffect(() => {
+//     console.log("Clicks updated: ", clicks);
+//   }, [clicks]);
+
+//   return (
+//     <button onClick={() => setClicks(clicks + 1)}>
+//       You clicked {clicks} times
+//     </button>
+//   );
+// };
+
+// const App = () => {
+//   const [first, setFirst] = useState(0);
+//   const [second, setSecond] = useState(0);
+
+//   useEffect(() => {
+//     console.log("First updated: ", first);
+//   }, [first]);
+
+//   useEffect(() => {
+//     console.log("Second updated: ", second);
+//   }, [second]);
+
+//   useEffect(() => {
+//     console.log("First or second updated: ", first + second);
+//   }, [first, second]);
+
+//   return (
+//     <>
+//       <button onClick={() => setFirst(first + 1)}>First: {first}</button>
+//       <button onClick={() => setSecond(second + 1)}>Second: {second}</button>
+//     </>
+//   );
+// };
 
 export default App;

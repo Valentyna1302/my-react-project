@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 // const ClickCounter = () => {
 //   const [clicks, setClicks] = useState(0);
@@ -11,6 +11,3 @@ import { useState } from "react";
 // };
 
 // export default ClickCounter;
-
-
-
