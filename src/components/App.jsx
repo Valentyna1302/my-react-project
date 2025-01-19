@@ -69,22 +69,24 @@
 //* 3) У handleClick використовуємо setClicks для зміни стану clicks.
 //* Тепер, при кліку на кнопку, стан в змінній clicks буде змінюватися, що змусить компонент оновлюватися і повторно рендерити JSX з оновленими значеннями.
 
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 // import ClickCounter from "./ClickCounter";
 
 // const App = () => {
 //   // let clicks = 0;
-//   const [clicks, setClicks] = useState(0);
+//   const [clicks, setClicks] = useState(2);
 
 //   const handleClick = () => {
 //     // clicks = clicks + 1;
 //     setClicks(clicks + 1);
-//   };
+//   };z
 
 //   return <button onClick={handleClick}>Current: {clicks}</button>;
 // };
 
 // export default App;
+
+//*
 
 // function App() {
 //   const [clicks, setClicks] = useState(0);
@@ -106,6 +108,10 @@ import { useState, useEffect } from "react";
 //     </>
 //   );
 // }
+
+//* <ClickCounter /> в окремому файлі
+
+// import ClickCounter from "./ClickCounter";
 
 // const App = () => {
 //   return (
@@ -284,5 +290,24 @@ import { useState, useEffect } from "react";
 //     </>
 //   );
 // };
+
+//* useEffect
+
+import { useState, useEffect } from "react";
+
+const App = () => {
+  const [clicks, setClicks] = useState(0);
+
+  // Оголошуємо ефект
+  useEffect(() => {
+    document.title = `You clicked ${clicks} times`;
+  });
+
+  return (
+    <button onClick={() => setClicks(clicks + 1)}>
+      You clicked {clicks} times
+    </button>
+  );
+};
 
 export default App;
