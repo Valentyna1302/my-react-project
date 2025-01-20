@@ -293,20 +293,203 @@
 
 //* useEffect
 
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+//   // Оголошуємо ефект
+//   useEffect(() => {
+//     document.title = `You clicked ${clicks} times`;
+//   });
+
+//   return (
+//     <button onClick={() => setClicks(clicks + 1)}>
+//       You clicked {clicks} times
+//     </button>
+//   );
+// };
+
+// import { useState, useEffect } from "react";
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+//   useEffect(() => {
+//     console.log("You can see me only once!");
+//   }, []);
+
+//   return (
+//     <button onClick={() => setClicks(clicks + 1)}>
+//       You clicked {clicks} times
+//     </button>
+//   );
+// };
+
+// import { useState, useEffect } from "react";
+// const Modal = () => {
+//   useEffect(() => {
+//     setInterval(() => {
+//       console.log(`Interval - ${Date.now()}`);
+//     }, 2000);
+//   }, []);
+
+//   return <div>Modal</div>;
+// };
+
+// const App = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   return (
+//     <div>
+//       <button onClick={() => setIsOpen(!isOpen)}>
+//         {isOpen ? "Close" : "Open"}
+//       </button>
+//       {isOpen && <Modal />}
+//     </div>
+//   );
+// };
+
+//* Функція очищення
+
+// import { useState, useEffect } from "react";
+
+// const App = () => {
+//   useEffect(() => {
+//     console.log("Effect");
+
+//     return () => {
+//       console.log("Clean up");
+//     };
+//   });
+
+//   return <div>App</div>;
+// };
+
+// const Modal = () => {
+//   useEffect(() => {
+//     // Зберігаємо ідентифікатор інтервалу в змінну
+//     const intervalId = setInterval(() => {
+//       console.log(`Interval - ${Date.now()}`);
+//     }, 2000);
+
+//     return () => {
+//       // Очищаємо інтервал за його ідентифікатором
+//       clearInterval(intervalId);
+//     };
+//   }, []);
+
+//   return <div>Modal</div>;
+// };
+
+// const App = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   return (
+//     <div>
+//       <button onClick={() => setIsOpen(!isOpen)}>
+//         {isOpen ? "Close" : "Open"}
+//       </button>
+//       {isOpen && <Modal />}
+//     </div>
+//   );
+// };
+
+//* Етап оновлення
+//* У ефекті використовується стан clicks, але масив залежностей порожній, це неправильно. Додамо змінну clicks до масиву залежностей ефекту.
+
+// import { useState, useEffect } from "react";
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+// 	// ✅ Залежності вказані правильно
+//   useEffect(() => {
+//     console.log("Clicks updated: ", clicks);
+//   }, [clicks]);
+
+//   return (
+//     <button onClick={() => setClicks(clicks + 1)}>
+//       You clicked {clicks} times
+//     </button>
+//   );
+// };
+
+//* Декілька ефектів
+//* Коли в компоненті є кілька станів, можна використовувати ефекти, щоб реагувати на зміни будь-якої комбінації значень і виконувати певний код. Головне не забувати правильно вказувати залежності кожного ефекту.
+//* Отримаємо ефекти, які запускаються лише при зміні певних значень.
+
+// import { useState, useEffect } from "react";
+
+// const App = () => {
+//   const [first, setFirst] = useState(0);
+//   const [second, setSecond] = useState(0);
+
+//   useEffect(() => {
+//     console.log("First updated: ", first);
+//   }, [first]);
+
+//   useEffect(() => {
+//     console.log("Second updated: ", second);
+//   }, [second]);
+
+//   useEffect(() => {
+//     console.log("First or second updated: ", first + second);
+//   }, [first, second]);
+
+//   return (
+//     <>
+//       <button onClick={() => setFirst(first + 1)}>First: {first}</button>
+//       <button onClick={() => setSecond(second + 1)}>Second: {second}</button>
+//     </>
+//   );
+// };
+
+//* localStorage
+
+// import { useState, useEffect } from "react";
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+//   useEffect(() => {
+//     window.localStorage.setItem("saved-clicks", clicks);
+//   }, [clicks]);
+
+//   return (
+//     <div>
+//       <button onClick={() => setClicks(clicks + 1)}>
+//         You clicked {clicks} times
+//       </button>
+//       <button onClick={() => setClicks(0)}>Reset</button>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+import { useState } from "react";
+import LangSwitcher from "./LangSwitcher/LangSwitcher";
+import LoginForm from "./LoginForm/LoginForm";
+import SearchBar from "./SearchBar/SearchBar";
 
 const App = () => {
-  const [clicks, setClicks] = useState(0);
-
-  // Оголошуємо ефект
-  useEffect(() => {
-    document.title = `You clicked ${clicks} times`;
-  });
+  const [lang, setLang] = useState("uk");
+  // Колбек-функція для обробки сабміту форми
+  const handleLogin = (userData) => {
+    // Виконуємо необхідні операції з даними
+    console.log(userData);
+  };
 
   return (
-    <button onClick={() => setClicks(clicks + 1)}>
-      You clicked {clicks} times
-    </button>
+    <div>
+      <h1>Please login to your account!</h1>
+      {/* Передаємо колбек як пропс форми */}
+      <LoginForm onLogin={handleLogin} />
+      <SearchBar />
+      <p>Selected language:{lang} </p>
+      <LangSwitcher value={lang} onSelect={setLang} />
+    </div>
   );
 };
 
