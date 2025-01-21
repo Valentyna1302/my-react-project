@@ -468,27 +468,72 @@
 
 // export default App;
 
+// import { useState } from "react";
+// import LangSwitcher from "./LangSwitcher/LangSwitcher";
+// import LoginForm from "./LoginForm/LoginForm";
+// import SearchBar from "./SearchBar/SearchBar";
+// import ControlledForm from "./ControlledForm/ControlledForm";
+
+// const App = () => {
+//   const [lang, setLang] = useState("uk");
+//   // Колбек-функція для обробки сабміту форми
+//   const handleLogin = (userData) => {
+//     // Виконуємо необхідні операції з даними
+//     console.log(userData);
+//   };
+
+//   return (
+//     <div>
+//       <h1>Please login to your account!</h1>
+//       {/* Передаємо колбек як пропс форми */}
+//       <LoginForm onLogin={handleLogin} />
+//       <SearchBar />
+//       <p>Selected language:{lang} </p>
+//       <LangSwitcher value={lang} onSelect={setLang} />
+//       <ControlledForm />
+//     </div>
+//   );
+// };
+
+// export default App;
+
+//* Колекція елементів
+//* - оновлювати стан, якщо в ньому зберігається масив;
+//*- додавати новий елемент до колекції;
+//* - видаляти елемент з колекції за його ідентифікатором;
+//* - фільтрувати колекцію.
+
+import Filter from "./Filter/Filter";
+import Form from "./Form/Form";
+import TaskList from "./TaskList/TaskList";
+import initialTasks from "../tasks.json";
 import { useState } from "react";
-import LangSwitcher from "./LangSwitcher/LangSwitcher";
-import LoginForm from "./LoginForm/LoginForm";
-import SearchBar from "./SearchBar/SearchBar";
 
 const App = () => {
-  const [lang, setLang] = useState("uk");
-  // Колбек-функція для обробки сабміту форми
-  const handleLogin = (userData) => {
-    // Виконуємо необхідні операції з даними
-    console.log(userData);
+  const [tasks, setTasks] = useState(initialTasks);
+  const [filter, setFilter] = useState("");
+
+  const addTask = (newTask) => {
+    setTasks((prev) => {
+      return [...prev, newTask];
+    });
   };
+
+  const deleteTask = (taskId) => {
+    setTasks((prev) => {
+      return prev.filter((task) => task.id !== taskId);
+    });
+  };
+
+  const visibleTasks = tasks.filter((task) =>
+    task.text.toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
     <div>
-      <h1>Please login to your account!</h1>
-      {/* Передаємо колбек як пропс форми */}
-      <LoginForm onLogin={handleLogin} />
-      <SearchBar />
-      <p>Selected language:{lang} </p>
-      <LangSwitcher value={lang} onSelect={setLang} />
+      <Form onAdd={addTask} />
+      <Filter value={filter} onFilter={setFilter} />
+      <TaskList tasks={visibleTasks} onDelete={deleteTask} />
     </div>
   );
 };

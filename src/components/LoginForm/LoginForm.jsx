@@ -23,32 +23,32 @@
 
 // У компоненті форми деструктуризуємо пропс onLogin, це функція, тому викликаємо її при сабміті форми і передаємо їй значення полів.
 // Зверніть увагу на те, що в пропс onLogin ми передаємо дані полів форми, а не об'єкт події. Об'єкт події використовується лише всередині форми для скасування типової поведінки і роботи з її елементами. Передавати об'єкт події в пропс - це антипаттерн.
-const LoginForm = ({ onLogin }) => {
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+// const LoginForm = ({ onLogin }) => {
+//   const handleSubmit = (evt) => {
+//     evt.preventDefault();
 
-    const form = evt.target;
-    const { login, password } = form.elements;
+//     const form = evt.target;
+//     const { login, password } = form.elements;
 
-    // Викликаємо пропс onLogin
-    onLogin({
-      login: login.value,
-      password: password.value,
-    });
+//     // Викликаємо пропс onLogin
+//     onLogin({
+//       login: login.value,
+//       password: password.value,
+//     });
 
-    form.reset();
-  };
+//     form.reset();
+//   };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="login" />
-      <input type="password" name="password" />
-      <button type="submit">Login</button>
-    </form>
-  );
-};
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <input type="text" name="login" />
+//       <input type="password" name="password" />
+//       <button type="submit">Login</button>
+//     </form>
+//   );
+// };
 
-export default LoginForm;
+// export default LoginForm;
 
 //* Хук useId
 
@@ -70,3 +70,5 @@ export default LoginForm;
 // };
 
 // export default LoginForm;
+
+//* кон
