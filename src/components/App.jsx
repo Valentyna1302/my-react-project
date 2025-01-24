@@ -508,6 +508,7 @@ import Form from "./Form/Form";
 import TaskList from "./TaskList/TaskList";
 import initialTasks from "../tasks.json";
 import { useState } from "react";
+import FeedbackForm from "./FeedbackForm/FeedbackForm";
 
 const App = () => {
   const [tasks, setTasks] = useState(initialTasks);
@@ -534,6 +535,7 @@ const App = () => {
       <Form onAdd={addTask} />
       <Filter value={filter} onFilter={setFilter} />
       <TaskList tasks={visibleTasks} onDelete={deleteTask} />
+      <FeedbackForm />
     </div>
   );
 };
